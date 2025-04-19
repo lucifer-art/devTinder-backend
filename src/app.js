@@ -2,30 +2,27 @@ const express = require('express');
 
 const app = express();
 
-// app.use('/test', (req, res) => {
-//     res.send("Hello from the test");
-// })
-
-app.get('/user', (req, res) => {
-    res.send({
-        firstName: "SHivang",
-        lastName: "Kumar"
-    })
+app.use('/user' ,[(req, res, next) => {
+    console.log("1st Route Handler");
+    // res.send("1st Response");
+    next();
+}, (req, res, next) => {
+    console.log("2nd Route Handler");
+    // res.send("2nd Response");
+    next();
+}], (req, res, next) => {
+    console.log("3rd Route Handler");
+    // res.send("3rd Response");
+    next();
+}, (req, res, next) => {
+    console.log("4th Route Handler");
+    // res.send("4th Response");
+    next();
+}, (req, res, next) => {
+    console.log("5th Route Handler");
+    res.send("5th Response");
+    // next()
 })
-
-app.post('/user', (req, res) => {
-    res.send("Data has added to DB successfully!")
-})
-
-app.delete('/user', (req, res) => {
-    res.send("Data has deleted sucessfully");
-})
-
-
-app.use('/', (req, res) => {
-    res.send("Hello from the server")
-})
-
 
 module.exports = {
     app
